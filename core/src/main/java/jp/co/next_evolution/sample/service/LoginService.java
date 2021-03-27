@@ -28,10 +28,10 @@ public class LoginService {
     public ApiResponse<?> login(LoginRequest loginRequest) {
         // validation
         List<String> errorMessageList = new ArrayList<>();
-        if (StringUtils.hasText(loginRequest.getEmailAddress())) {
+        if (!StringUtils.hasText(loginRequest.getEmailAddress())) {
             errorMessageList.add(appConfig.getMessage(MessageKey.VALIDATION_EMPTY, "emailAddress"));
         }
-        if (StringUtils.hasText(loginRequest.getLoginPassword())) {
+        if (!StringUtils.hasText(loginRequest.getLoginPassword())) {
             errorMessageList.add(appConfig.getMessage(MessageKey.VALIDATION_EMPTY, "loginPassword"));
         }
         // validation error

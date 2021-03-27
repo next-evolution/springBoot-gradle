@@ -14,6 +14,7 @@ buildscript {
         // Library
         servletVersion = "4.0.1"
         mySqlConnectorVersion = "8.0.23"
+        hikariCpVersion = "4.0.3"
         jacksonVersion = "2.12.2"
         commonsLang3Version = "3.12.0"
         jXlsVersion = "2.10.0"

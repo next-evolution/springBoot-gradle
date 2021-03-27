@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
-@EnableAutoConfiguration
+@Configuration
 @MapperScan(basePackages = {"jp.co.next_evolution.sample.mapper.db01"}, sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
 

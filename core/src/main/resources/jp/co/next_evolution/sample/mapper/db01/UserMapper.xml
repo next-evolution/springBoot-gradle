@@ -7,7 +7,7 @@
              user_id           AS userId
             ,email_address     AS emailAddress
             ,user_name         AS userName
-        FROM user
+        FROM users
         WHERE
             email_address      = #{emailAddress}
             AND login_password = #{loginPassword}

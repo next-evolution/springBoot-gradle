@@ -18,6 +18,8 @@ dependencies {
 
     // MySQL
     implementation group: 'mysql', name: 'mysql-connector-java', version: "${mySqlConnectorVersion}"
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: "${hikariCpVersion}"
+
 
     // lombok
     implementation group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
