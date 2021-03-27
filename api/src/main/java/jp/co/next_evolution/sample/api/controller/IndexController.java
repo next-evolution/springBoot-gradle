@@ -1,9 +1,11 @@
 package jp.co.next_evolution.sample.api.controller;
 
+import jp.co.next_evolution.sample.api.annotation.AuthExclude;
 import jp.co.next_evolution.sample.common.ActionResult;
 import jp.co.next_evolution.sample.dto.LoginUser;
 import jp.co.next_evolution.sample.request.LoginRequest;
 import jp.co.next_evolution.sample.response.ApiResponse;
+import jp.co.next_evolution.sample.response.LoginResponse;
 import jp.co.next_evolution.sample.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -20,22 +22,24 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/")
-public class LoginController {
+public class IndexController {
 
     @Autowired
     LoginService loginService;
 
     @PostMapping("login")
-    public ApiResponse<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest httpServletRequest) {
+    @AuthExclude
+    public ApiResponse<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest httpServletRequest) throws Exception {
 
         ApiResponse<?> apiResponse = loginService.login(loginRequest);
         if (Objects.equals(ActionResult.OK.getValue(), apiResponse.getReturnCode())) {
-            httpServletRequest.getSession().setAttribute(LoginUser.class.getName(), (LoginUser) apiResponse.getBody());
+            httpServletRequest.getSession().setAttribute(LoginUser.class.getName(), ((LoginResponse) apiResponse.getBody()).getLoginUser());
         }
         return apiResponse;
     }
 
     @GetMapping("logout")
+    @AuthExclude
     public ApiResponse<?> logout(HttpServletRequest httpServletRequest) {
         try {
             HttpSession httpSession = httpServletRequest.getSession();
