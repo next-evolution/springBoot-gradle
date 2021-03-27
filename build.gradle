@@ -1,0 +1,37 @@
+buildscript {
+    ext {
+        springPluginVersion = "1.0.11.RELEASE"
+        javaVersion = "11"
+
+        // SpringFramework
+        springVersion = "5.3.5"
+        springSecurityVersion = "5.4.5"
+
+        // SpringBoot
+        springBootVersion = "2.4.4"
+        myBatisSpringBootVersion = "2.1.4"
+
+        // Library
+        servletVersion = "4.0.1"
+        mySqlConnectorVersion = "8.0.23"
+        hikariCpVersion = "4.0.3"
+        jacksonVersion = "2.12.2"
+        commonsLang3Version = "3.12.0"
+        jXlsVersion = "2.10.0"
+
+        // Lombok
+        lombokVersion = "1.18.18"
+    }
+
+}
+
+subprojects {
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+    }
+
+
+}

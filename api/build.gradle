@@ -1,0 +1,36 @@
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springPluginVersion}"
+    id 'java'
+}
+
+group = 'jp.co.next_evolution.sample'
+version = '1.0'
+sourceCompatibility = "${javaVersion}"
+
+dependencies {
+    implementation project(":core")
+
+    // SpringBoot
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
+    //implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "${springBootVersion}"
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: "${myBatisSpringBootVersion}"
+
+    // MySQL
+    implementation group: 'mysql', name: 'mysql-connector-java', version: "${mySqlConnectorVersion}"
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: "${hikariCpVersion}"
+
+
+    // lombok
+    implementation group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // test
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "${springBootVersion}"
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: "${springSecurityVersion}"
+
+}
+
+test {
+    useJUnitPlatform()
+}
