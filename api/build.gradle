@@ -13,7 +13,7 @@ dependencies {
 
     // SpringBoot
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
-    //implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "${springBootVersion}"
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "${springBootVersion}"
     implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: "${myBatisSpringBootVersion}"
 
     // MySQL

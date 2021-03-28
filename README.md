@@ -3,20 +3,16 @@ springBoot-gradle
 
 ## mysql
 ```
+-- create schema and user
 create user app_user@localhost identified by "app_user_password";
 create database schema01;
 grant all on schema01.* to app_user@localhost;
+create database schema02;
+grant all on schema02.* to app_user@localhost;
 
-use schema01
-
-CREATE TABLE users (
-    user_id           int unsigned    NOT NULL    auto_increment    COMMENT 'ユーザID',
-    email_address     varchar(128)    NOT NULL    COMMENT 'Emailアドレス',
-    user_name         varchar(64)     NOT NULL    COMMENT 'ユーザ名',
-    login_password    varchar(64)     NOT NULL    COMMENT 'ログインパスワード',
-    PRIMARY KEY (user_id),
-    KEY I1 (email_address)
-) ENGINE=Innodb DEFAULT CHARSET=utf8 COMMENT 'ユーザ情報';
-
-insert into users values(null,'test01@test.com','テスト 太郎','pwdpwd');
+-- ddl and dml
+mysql -uapp_user -papp_user_password schema01 < tools/ddl_schema01.sql
+mysql -uapp_user -papp_user_password schema01 < tools/dml_schema01.sql
+mysql -uapp_user -papp_user_password schema02 < tools/ddl_schema02.sql
+mysql -uapp_user -papp_user_password schema02 < tools/dml_schema02.sql
 ```

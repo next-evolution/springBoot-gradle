@@ -24,8 +24,8 @@ import java.util.Objects;
 public class TestController {
 
 
-    @RequestMapping("ok")
     @AuthExclude
+    @RequestMapping("ok")
     public String ok(HttpServletRequest httpServletRequest){
         return "ok";
     }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.next_evolution.sample.mapper.db02.TodoMapper">
+
+    <select id="list" resultType="jp.co.next_evolution.sample.dto.db02.Todo">
+        SELECT
+             id             AS id
+            ,user_id        AS userId
+            ,title          AS title
+            ,memo           AS memo
+            ,updated_at     AS updatedAt
+        FROM todo
+        WHERE
+            user_id = #{userId}
+            AND delete_flag = 0
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insert" parameterType="jp.co.next_evolution.sample.dto.db02.Todo">
+        INSERT INTO todo
+             user_id
+            ,title
+            ,memo
+            ,updated_at
+        ) VALUES(
+             #{userId}
+            ,#{title}
+            ,#{memo}
+            NOW()
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="jp.co.next_evolution.sample.dto.db02.Todo">
+        UPDATE todo SET
+             title         = #{title}
+            ,memo          = #{memo}
+            ,update_at     = NOW()
+        WHERE
+            id             = #{id}
+            AND updated_at = #{updatedAt}
+    </update>
+
+    <update id="delete" parameterType="jp.co.next_evolution.sample.dto.db02.Todo">
+        UPDATE todo SET
+             delete_flag   = 1
+            ,update_at     = NOW()
+        WHERE
+        id             = #{id}
+        AND updated_at = #{updatedAt}
+    </update>
+
+</mapper>

@@ -17,3 +17,16 @@ spring:
       minimum-idle: 2
       maximum-pool-size: 5
       connection-test-query: SELECT 1 FROM DUAL
+
+    db02:
+      type: com.zaxxer.hikari.HikariDataSource
+      pool-name: HikariPoolGenesis
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:13306/schema02?useUnicode=true
+      username: app_user
+      password: app_user_password
+      auto-commit: false
+      connection-timeout: 5000
+      minimum-idle: 2
+      maximum-pool-size: 5
+      connection-test-query: SELECT 1 FROM DUAL
