@@ -8,6 +8,8 @@ public interface TodoMapper {
 
     List<Todo> list(long userId);
 
+    Todo select(long todoId, long userId);
+
     int insert(Todo todo);
 
     int update(Todo todo);

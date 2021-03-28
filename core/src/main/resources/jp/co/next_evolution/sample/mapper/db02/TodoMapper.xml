@@ -16,17 +16,31 @@
         ORDER BY id DESC
     </select>
 
+    <select id="select" resultType="jp.co.next_evolution.sample.dto.db02.Todo">
+        SELECT
+         id             AS id
+        ,user_id        AS userId
+        ,title          AS title
+        ,memo           AS memo
+        ,updated_at     AS updatedAt
+        FROM todo
+        WHERE
+            id              = #{todoId}
+            AND user_id     = #{userId}
+            AND delete_flag = 0
+    </select>
+
     <insert id="insert" parameterType="jp.co.next_evolution.sample.dto.db02.Todo">
-        INSERT INTO todo
+        INSERT INTO todo (
              user_id
             ,title
             ,memo
             ,updated_at
-        ) VALUES(
+        ) VALUES (
              #{userId}
             ,#{title}
             ,#{memo}
-            NOW()
+            ,NOW()
         )
         <selectKey resultType="java.lang.Long" keyProperty="id">
             SELECT LAST_INSERT_ID()
@@ -46,10 +60,10 @@
     <update id="delete" parameterType="jp.co.next_evolution.sample.dto.db02.Todo">
         UPDATE todo SET
              delete_flag   = 1
-            ,update_at     = NOW()
+            ,updated_at    = NOW()
         WHERE
-        id             = #{id}
-        AND updated_at = #{updatedAt}
+            id             = #{id}
+            AND updated_at = #{updatedAt}
     </update>
 
 </mapper>
