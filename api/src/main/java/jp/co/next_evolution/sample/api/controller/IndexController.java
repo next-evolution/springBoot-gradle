@@ -8,6 +8,7 @@ import jp.co.next_evolution.sample.response.ApiResponse;
 import jp.co.next_evolution.sample.response.LoginResponse;
 import jp.co.next_evolution.sample.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,10 +28,16 @@ public class IndexController {
     @Autowired
     LoginService loginService;
 
-    @PostMapping("login")
-    @AuthExclude
-    public ApiResponse<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest httpServletRequest) throws Exception {
+//    @GetMapping("token")
+//    @AuthExclude
+//    public String token(HttpServletRequest request){
+//        CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+//        return token.getToken();
+//    }
 
+    @AuthExclude
+    @PostMapping("login")
+    public ApiResponse<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest httpServletRequest) throws Exception {
         ApiResponse<?> apiResponse = loginService.login(loginRequest);
         if (Objects.equals(ActionResult.OK.getValue(), apiResponse.getReturnCode())) {
             httpServletRequest.getSession().setAttribute(LoginUser.class.getName(), ((LoginResponse) apiResponse.getBody()).getLoginUser());
@@ -38,8 +45,8 @@ public class IndexController {
         return apiResponse;
     }
 
-    @GetMapping("logout")
     @AuthExclude
+    @GetMapping("logout2")
     public ApiResponse<?> logout(HttpServletRequest httpServletRequest) {
         try {
             HttpSession httpSession = httpServletRequest.getSession();

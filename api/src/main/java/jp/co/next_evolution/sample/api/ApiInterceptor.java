@@ -43,8 +43,13 @@ public class ApiInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        String authCode = ((LoginUser) request.getSession().getAttribute(LoginUser.class.getName())).getAuthCode();
-        if (!ObjectUtils.nullSafeEquals(xCoreAuth, authCode)) {
+        LoginUser loginUser = (LoginUser) request.getSession().getAttribute(LoginUser.class.getName());
+        if (Objects.isNull(loginUser)) {
+            response.sendRedirect(request.getContextPath() + "/error/auth");
+            return false;
+        }
+
+        if (!ObjectUtils.nullSafeEquals(xCoreAuth, loginUser.getAuthCode())) {
             response.sendRedirect(request.getContextPath() + "/error/auth");
             return false;
         }
