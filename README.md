@@ -7,6 +7,8 @@ create user app_user@localhost identified by "app_user_password";
 create database schema01;
 grant all on schema01.* to app_user@localhost;
 
+use schema01
+
 CREATE TABLE users (
     user_id           int unsigned    NOT NULL    auto_increment    COMMENT 'ユーザID',
     email_address     varchar(128)    NOT NULL    COMMENT 'Emailアドレス',
