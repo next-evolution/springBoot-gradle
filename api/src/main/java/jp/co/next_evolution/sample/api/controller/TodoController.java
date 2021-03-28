@@ -7,7 +7,9 @@ import jp.co.next_evolution.sample.service.db02.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,18 +27,24 @@ public class TodoController {
         return todoService.list(loginUser.getUserId());
     }
 
+    @GetMapping("select")
+    public ApiResponse select(@RequestParam(name = "id") long todoId, HttpServletRequest httpServletRequest) {
+        LoginUser loginUser = (LoginUser) httpServletRequest.getSession().getAttribute(LoginUser.class.getName());
+        return todoService.select(todoId, loginUser.getUserId());
+    }
+
     @PostMapping("insert")
-    public ApiResponse insert(Todo todo) {
+    public ApiResponse insert(@RequestBody Todo todo) {
         return todoService.insert(todo);
     }
 
     @PostMapping("update")
-    public ApiResponse update(Todo todo) {
+    public ApiResponse update(@RequestBody Todo todo) {
         return todoService.update(todo);
     }
 
     @PostMapping("delete")
-    public ApiResponse delete(Todo todo) {
+    public ApiResponse delete(@RequestBody Todo todo) {
         return todoService.delete(todo);
     }
 
